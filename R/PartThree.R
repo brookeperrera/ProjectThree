@@ -1,0 +1,3 @@
+What else do you need covered in this class? Problem solving skills would be nice. Knowing how to google effeciently to find info on packages or errors.
+Is anyone else in your lab doing similar analyses? No, I am the only one in my lab with movement data, but a previous graduate student had a similar project and used ArcGIS and SYSTAT for analyses.
+Do you think in the future, there will be other students working on your question in your lab? Not the same question, but there could be a chance someone would do a telemerty project. 
