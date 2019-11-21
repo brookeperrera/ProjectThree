@@ -1,0 +1,80 @@
+---
+title: "PackageInstructions"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("move")
+library(move)
+install.packages("tidyverse")
+library(tidyverse)
+install.packages("dplyr")
+library(dplyr)
+install.packages("leaflet")
+library(leaflet)
+```
+
+## The package "move" contains functions to access movement data stored in 'movebank.org' an online data storage resource. This package also allows you to visualize and analyze movement data.'tdf' will be assigned as "Musk Turtles Kenner LA" and we will establish log-in information:
+```{r}
+tdf <- "Musk Turtles Kenner LA"
+movebankLogin <- movebankLogin("brookeperrrera", "MaggieMAE4173!!")
+```
+
+# 'data_MoveBank' is a function that will download all data on MoveBank associated with the study "Musk Turtles Kenner LA". 'df' is a MoveStack, or a stack of move objects. To extract the spatial dataframe from this MoveStack, I assigned 'tdf' as a dataframe of 'df'.
+```{r}
+df <- data_MoveBank(tdf, movebankLogin = movebankLogin)
+tdf <- as_tibble(df)
+class(tdf)
+```
+
+# save data to the 'data' file as a .csv file. 
+```{r}
+write_csv(tdf, "/cloud/project/data/MuskTurtlesKennerLA.csv")
+```
+
+# FunctionTwo is plotting locations of data from functionOne on a map: 'levs' is defined as 'tag_id' in the tdf dataframe.
+```{r}
+levs <- factor(tdf$tag_id) 
+```
+
+# 'factpal' is the color palette choosen for this map.
+```{r}
+factpal <- colorFactor(topo.colors(90), levs) 
+```
+
+# 'map_all' is a map of all individual turtle locations of the study. Locations are grouped by and color coded by tag_id. Call out the map and View() it.
+```{r}
+my_map <- map_all(tdf)
+my_map 
+```
+
+# FunctionThree will map only radio-tracked individuals with relocations of >2. First, we select turtles from 'tdf' that have more than 2 relocations. 'nlocs' provides a list of individuals with more that 2 relocations. 
+```{r}
+nlocs <- tdf %>% 
+  select(tag_id, timestamp, location_lat, location_long) %>%
+  group_by(tag_id) %>%
+  summarize(n()) %>% 
+  mutate(n = n()) %>% 
+```
+
+#'rt' filters the locations of 9 individuals with more than 2 locations.
+```{r}
+rt <- filter(tdf, tag_local_identifier == c(1, 4, 8, 23, 25, 31, 35, 89, 93))
+```
+
+# 'levs' is defined as 'tag_id' in the tdf dataframe.
+```{r}
+levs <- factor(tdf$tag_local_identifier) 
+```
+
+# 'factpal' is the color palette chosen for this map
+```{r}
+factpal <- colorFactor(topo.colors(90), levs) 
+```
+
+# function(rt) maps 9 radio-tracked turtles. Call it out and View() it:
+```{r}
+rt_map <- map_rt(rt)
+rt_map
+```

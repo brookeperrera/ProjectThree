@@ -1,0 +1,7 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+MuskMoves.Rcheck/
+MuskMoves*.tar.gz
+MuskMoves*.tgz

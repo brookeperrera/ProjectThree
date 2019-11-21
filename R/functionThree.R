@@ -1,4 +1,11 @@
-#FunctionThree will map only radio-tracked individuals with relocations of >2. First, we select turtles from 'tdf' that have more than 2 relocations.
+#'Maps spatial data from 'movebank.org' of a subset of individuals.
+#'
+#'Maps spatial data that is grouped by animial ID of nine individuals with more than two relocations from "Musk Turtles Kenner LA" study. 
+#'
+#'@param rt Identifies study name. 
+#'@return a map of locations of nine individuals from "Musk Turtles Kenner LA" study.
+#'@export map_rt
+
 library(leaflet)
 library(dplyr)
 
@@ -7,12 +14,11 @@ nlocs <- tdf %>%
   group_by(tag_id) %>%
   summarize(n()) %>% 
   mutate(n = n()) %>% 
-#'nlocs' provides a list of individuals with more that 2 relocations. 'rt' contains the locations of 9 individuals with more than 2 locations.
 
 rt <- filter(tdf, tag_local_identifier == c(1, 4, 8, 23, 25, 31, 35, 89, 93))
 
-levs <- factor(tdf$tag_local_identifier) #levs is defined as tag_id in the tdf dataframe
-factpal <- colorFactor(topo.colors(90), levs) #factpal is the color palette chosen for this map
+levs <- factor(tdf$tag_local_identifier) 
+factpal <- colorFactor(topo.colors(90), levs) 
 
 map_rt <- function(rt){ 
     all <- rt %>% 
@@ -23,7 +29,6 @@ map_rt <- function(rt){
     return(all)
 }
 
-#function(rt) maps 9 radio-tracked turtles. 
 rt_map <- map_rt(rt)
 rt_map
 

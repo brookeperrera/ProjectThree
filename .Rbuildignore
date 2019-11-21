@@ -1,0 +1,5 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^MuskMoves\.Rcheck$
+^MuskMoves.*\.tar\.gz$
+^MuskMoves.*\.tgz$

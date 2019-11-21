@@ -1,11 +1,17 @@
-#FunctionTwo is plotting locations from functionOne on a map:
+#'Maps spatial data from 'movebank.org'.
+#'
+#'Maps spatial data that is grouped by animial ID from "Musk Turtles Kenner LA" study. 
+#'
+#'@param tdf Identifies study name. 
+#'@return a map of all locaitons from "Musk Turtles Kenner LA" study.
+#'@export map_all
+
 install.packages("leaflet")
 library(leaflet)
 library(dplyr)
 
-
-levs <- factor(tdf$tag_id) #levs is defined as tag_id in the tdf dataframe
-factpal <- colorFactor(topo.colors(90), levs) #factpal is the color palette chosen for this map
+levs <- factor(tdf$tag_id) 
+factpal <- colorFactor(topo.colors(90), levs) 
 map_all <- function(tdf){ 
   all <- tdf %>% 
     group_by(tag_id) %>%
@@ -14,7 +20,6 @@ map_all <- function(tdf){
     addCircleMarkers(~location_long, ~location_lat, color = ~factpal(tag_id), stroke = FALSE, fillOpacity = 0.5)
   return(all)
 }
-#map_all is a map of all individual turtle locations of the study. Locations are grouped by and color coded by tag_id. 
 
-my_map <- map_all(tdf) #call out the map.
-my_map #and view it.
+my_map <- map_all(tdf)
+my_map

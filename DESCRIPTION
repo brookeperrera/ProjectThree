@@ -1,0 +1,19 @@
+Package: MuskMoves
+Type: Package
+Title: Download and visualize spatial data of Eastern Musk Turtles
+Version: 1.0.0
+Author@R: person("Brooke", "Perrera", role = c("aut", "cre"), email = "brooke.perrera@selu.edu")
+Description: An R package to download spatial data from 'movebank.org' and map localities based on individual tag_id. 
+License: MIT
+Imports: 
+  move,
+  tidyverse,
+  dplyr,
+  leaflet
+Suggest:
+  knitr,
+  rmarkdown
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+RoxygenNote: 7.0.0
